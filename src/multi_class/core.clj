@@ -25,10 +25,9 @@
 (defn inference [input model]
   (loop [input (array input)
          layer model]
-    (println input)
     (if (seq layer)
       (recur (let [output (mmul (first layer) input)]
-               (if (and (has-one? layer))
+               (if (has-one? layer)
                  (softmax output)
                  (map sigmoid output)))
         (rest layer))
